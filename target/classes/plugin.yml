@@ -1,0 +1,6 @@
+name: FairPlay
+version: '1.0-SNAPSHOT'
+main: fairplay.fairplay.FairPlay
+api-version: '1.21'
+authors: [Mejster]
+website: MejsterIndustries.com
