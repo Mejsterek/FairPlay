@@ -16,15 +16,16 @@ public class EnchantListener implements Listener {
     }
     @EventHandler
     public void onEnchantItem(EnchantItemEvent event) {
-        // Get the item being enchanted
         ItemStack item = event.getItem();
 
         if (event.getEnchantsToAdd().containsKey(Enchantment.FLAME)) {
             event.setCancelled(true);
-            event.getEnchanter().sendMessage(Utils.toColor("&cYou cannot enchant items with Flame!") );
+            String message = plugin.getConfig().getString("messages.Enchant-Flame");
+            event.getEnchanter().sendMessage(Utils.toColor(message) );
         } else if (event.getEnchantsToAdd().containsKey(Enchantment.FIRE_ASPECT)) {
             event.setCancelled(true);
-            event.getEnchanter().sendMessage(Utils.toColor("&cYou cannot enchant items with Fire Aspect!"));
+            String message = plugin.getConfig().getString("messages.Enchant-FireAspect");
+            event.getEnchanter().sendMessage(Utils.toColor(message));
         }
     }
 }

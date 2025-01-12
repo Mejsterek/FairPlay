@@ -23,7 +23,6 @@ public class PotionBrewingListener implements Listener {
     public void onPotionBrew(BrewEvent event) {
         BrewerInventory inventory = event.getContents();
 
-        // Loop through all the result slots
         for (ItemStack item : event.getResults()) {
             if (item != null && item.getType() == Material.POTION) {
                 PotionMeta meta = (PotionMeta) item.getItemMeta();
@@ -41,14 +40,12 @@ public class PotionBrewingListener implements Listener {
         }
     }
     private void dropAllItems(Inventory inventory) {
-        // Loop through all the brewing stand inventory slots and drop the items
         for (ItemStack item : inventory.getContents()) {
             if (item != null) {
                 inventory.getLocation().getWorld().dropItemNaturally(inventory.getLocation(), item);
             }
         }
 
-        // Clear the brewing stand's inventory after dropping the items
         inventory.clear();
     }
     private boolean isRestrictedPotion(String potionType) {

@@ -24,7 +24,6 @@ public class WindChargeListener implements Listener {
     }
 
     private final HashMap<UUID, Long> cooldowns = new HashMap<>();
-    private static final long COOLDOWN_TIME = 10 * 1000; // 10 seconds in milliseconds
 
     @EventHandler
     public void onPlayerUseWindCharge(PlayerInteractEvent event) {
@@ -40,24 +39,25 @@ public class WindChargeListener implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
 
-        // Check if the item is the "Wind Charge"
+        int time = plugin.getConfig().getInt("configuration.WindCharge-Cooldown");
+        final long COOLDOWN_TIME = time * 1000;
+
         if (item != null && item.getType() == Material.WIND_CHARGE) {
 
             UUID playerId = player.getUniqueId();
             long currentTime = System.currentTimeMillis();
 
-            // Check if the player is on cooldown
             if (cooldowns.containsKey(playerId) && currentTime - cooldowns.get(playerId) < COOLDOWN_TIME) {
                 long timeLeft = (COOLDOWN_TIME - (currentTime - cooldowns.get(playerId))) / 1000;
-                player.sendMessage(Utils.toColor("&cYou must wait " + timeLeft + " seconds to use the Wind Charge again.") );
+                String message = plugin.getConfig().getString("messages.WindCharge-Cooldown").replace("%time%", String.valueOf(timeLeft));
+                player.sendMessage(Utils.toColor(message) );
                 event.setCancelled(true);
                 return;
             }
 
-            // Apply cooldown
             cooldowns.put(playerId, currentTime);
-            player.sendMessage(Utils.toColor("&aYou used the Wind Charge!"));
-            // Custom logic for Wind Charge effect can go here
+            String message = plugin.getConfig().getString("messages.WindCharge-Used");
+            player.sendMessage(Utils.toColor(message));
         }
     }
 }

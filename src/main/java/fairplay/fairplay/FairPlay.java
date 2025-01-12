@@ -10,7 +10,8 @@ public final class FairPlay extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        // Register the WindChargeListener
+        saveDefaultConfig();
+
         getServer().getPluginManager().registerEvents(new WindChargeListener(this),this);
         getServer().getPluginManager().registerEvents(new PotionBrewingListener(this), this);
         getServer().getPluginManager().registerEvents(new EnchantListener(this), this);
