@@ -7,6 +7,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.EnchantItemEvent;
+import org.bukkit.event.enchantment.PrepareItemEnchantEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class EnchantListener implements Listener {
@@ -15,17 +16,27 @@ public class EnchantListener implements Listener {
         this.plugin = plugin;
     }
     @EventHandler
-    public void onEnchantItem(EnchantItemEvent event) {
+    public void onEnchantItem(PrepareItemEnchantEvent event) {
+
         ItemStack item = event.getItem();
+        for (int i = 0; i < event.getOffers().length; i++) {
+            if (event.getOffers()[i] != null && event.getOffers()[i].getEnchantment() == Enchantment.FLAME) {
+                event.getOffers()[i] = null;
+            }
+            if (event.getOffers()[i] != null && event.getOffers()[i].getEnchantment() == Enchantment.FIRE_ASPECT) {
+                event.getOffers()[i] = null;
+            }
+        }
+
+    }
+    @EventHandler
+    public void onEnchantItem(EnchantItemEvent event) {
 
         if (event.getEnchantsToAdd().containsKey(Enchantment.FLAME)) {
-            event.setCancelled(true);
-            String message = plugin.getConfig().getString("messages.Enchant-Flame");
-            event.getEnchanter().sendMessage(Utils.toColor(message) );
-        } else if (event.getEnchantsToAdd().containsKey(Enchantment.FIRE_ASPECT)) {
-            event.setCancelled(true);
-            String message = plugin.getConfig().getString("messages.Enchant-FireAspect");
-            event.getEnchanter().sendMessage(Utils.toColor(message));
+            event.getEnchantsToAdd().remove(Enchantment.FLAME);
+        }
+        if (event.getEnchantsToAdd().containsKey(Enchantment.FIRE_ASPECT)) {
+            event.getEnchantsToAdd().remove(Enchantment.FIRE_ASPECT);
         }
     }
 }
