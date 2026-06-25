@@ -1,8 +1,0 @@
-messages:
-  Enchant-Flame: "&cYou cannot enchant items with Flame!"
-  Enchant-FireAspect: "&cYou cannot enchant items with Fire Aspect!"
-  WindCharge-Cooldown: "&cYou must wait %time% seconds to use the Wind Charge again."
-  WindCharge-Used: "&aYou used the Wind Charge!"
-
-configuration:
-  WindCharge-Cooldown: 10 #in seconds

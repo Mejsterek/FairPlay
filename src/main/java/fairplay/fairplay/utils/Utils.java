@@ -1,19 +1,16 @@
 package fairplay.fairplay.utils;
 
-
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.entity.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utils {
     private static final String RAW_GRADIENT_HEX_REGEX = "<\\$#[A-Fa-f0-9]{6}>";
-    private static Pattern pattern = Pattern.compile("&#[a-fA-f0-9]{6}");
+    private static final Pattern pattern = Pattern.compile("&#[a-fA-f0-9]{6}");
 
     public static String toColor(String s){
         Matcher match = pattern.matcher(s);
@@ -26,7 +23,6 @@ public class Utils {
     }
 
     public static String toColor(String fromHex, String toHex, String msg, boolean bold) {
-        // , boolean italic, boolean underlined, boolean strikethrough, boolean magic
         msg = msg.replaceAll("&k", "");
         msg = msg.replaceAll("&l", "");
         msg = msg.replaceAll("&m", "");
@@ -38,9 +34,9 @@ public class Utils {
         double rStep = Math.abs((double) (fromRGB.getRed() - toRGB.getRed()) / length);
         double gStep = Math.abs((double) (fromRGB.getGreen() - toRGB.getGreen()) / length);
         double bStep = Math.abs((double) (fromRGB.getBlue() - toRGB.getBlue()) / length);
-        if (fromRGB.getRed() > toRGB.getRed()) rStep = -rStep; //200, 100
-        if (fromRGB.getGreen() > toRGB.getGreen()) gStep = -gStep; //200, 100
-        if (fromRGB.getBlue() > toRGB.getBlue()) bStep = -bStep; //200, 100
+        if (fromRGB.getRed() > toRGB.getRed()) rStep = -rStep;
+        if (fromRGB.getGreen() > toRGB.getGreen()) gStep = -gStep;
+        if (fromRGB.getBlue() > toRGB.getBlue()) bStep = -bStep;
         Color finalColor = new Color(fromRGB.getRGB());
         msg = msg.replaceAll(RAW_GRADIENT_HEX_REGEX, "");
         msg = msg.replace("", "<$>");
@@ -55,10 +51,6 @@ public class Utils {
             String hex = "#" + Integer.toHexString(finalColor.getRGB()).substring(2);
             String formats = "";
             if (bold) formats += ChatColor.BOLD;
-           /* if (italic) formats += ChatColor.ITALIC;
-            if (underlined) formats += ChatColor.UNDERLINE;
-            if (strikethrough) formats += ChatColor.STRIKETHROUGH;
-            if (magic) formats += ChatColor.MAGIC;*/
             msg = msg.replaceFirst("<\\$>", "" + ChatColor.of(hex) + formats);
         }
         return msg;

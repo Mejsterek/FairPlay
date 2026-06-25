@@ -1,7 +1,5 @@
 package fairplay.fairplay.listeners;
 
-import fairplay.fairplay.FairPlay;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,12 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 
 public class PotionBrewingListener implements Listener {
-
-    private final FairPlay plugin;
-
-    public PotionBrewingListener(FairPlay plugin) {
-        this.plugin = plugin;
-    }
 
     @EventHandler
     public void onPotionBrew(BrewEvent event) {

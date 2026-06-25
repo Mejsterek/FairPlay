@@ -13,21 +13,14 @@ public final class FairPlay extends JavaPlugin implements Listener {
         saveDefaultConfig();
 
         getServer().getPluginManager().registerEvents(new WindChargeListener(this),this);
-        getServer().getPluginManager().registerEvents(new PotionBrewingListener(this), this);
-        getServer().getPluginManager().registerEvents(new EnchantListener(this), this);
+        getServer().getPluginManager().registerEvents(new PotionBrewingListener(), this);
+        getServer().getPluginManager().registerEvents(new EnchantListener(), this);
 
-
-        this.getLogger().info("FairPlaySystem by Mejster has been enabled");
-        this.getLogger().info("Contact:");
-        this.getLogger().info("Discord: mejster");
-        this.getLogger().info("Fiver: mejster");
+        this.getLogger().info("FairPlay enabled");
     }
 
     @Override
     public void onDisable() {
-        this.getLogger().info("FairPlaySystem by Mejster has been disabled");
-        this.getLogger().info("Contact:");
-        this.getLogger().info("Discord: mejster");
-        this.getLogger().info("Fiver: mejster");
+        this.getLogger().info("FairPlay disabled");
     }
 }

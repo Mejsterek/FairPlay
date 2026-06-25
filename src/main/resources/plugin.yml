@@ -2,5 +2,3 @@ name: FairPlay
 version: '${project.version}'
 main: fairplay.fairplay.FairPlay
 api-version: '1.21'
-authors: [Mejster]
-website: MejsterIndustries.com
